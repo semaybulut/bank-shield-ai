@@ -10,3 +10,8 @@ df_combined.parquet
 
 # Mac
 .DS_Store
+
+# Model files (çok önemli)
+*.joblib
+models/*.joblib
+fraud_mvp_model.joblib
