@@ -148,3 +148,10 @@ with c3:
     st.button("Yakında", disabled=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
+# --- ALT BİLGİ (FOOTER) ---
+st.markdown("""
+    <div style="text-align: center; margin-top: 80px; padding: 30px; color: #7f8c8d; font-size: 0.85rem; border-top: 1px solid #e1e4e8;">
+        © 2026 CaixaBank AI Risk Management Solutions. All Rights Reserved. <br>
+        <span style="font-size: 0.75rem; opacity: 0.8;">Güvenliğiniz için tüm işlemler uçtan uca şifrelenmektedir.</span>
+    </div>
+    """, unsafe_allow_html=True)
