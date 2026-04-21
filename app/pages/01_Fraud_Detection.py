@@ -3,15 +3,23 @@ import pandas as pd
 import joblib
 import numpy as np
 
-# --- SAYFA AYARLARI ---
-st.set_page_config(page_title="Bank Shield AI - Fraud Risk Panel", layout="centered")
+import os
+from pathlib import Path
 
-# --- MODEL VE ENCODER YÜKLEME ---
+# Mevcut dosyanın (01_Fraud_Detection.py) tam yolunu al:
+current_dir = Path(__file__).parent
+
+# Projenin ana dizinine git (pages ve app klasörlerinden dışarı, ana dizine):
+# Eğer dosyan app/pages/ içindeyse iki kez .parent yapmalısın
+base_dir = current_dir.parent.parent 
+
+# Modellerin tam yolunu oluştur
+MODEL_PATH = base_dir / "models" / "fraud_dream_model_bundle.joblib"
+
 @st.cache_resource
 def load_fraud_system():
-    # 3. Notebook'ta kaydettiğimiz paketi okuyoruz
-    bundle = joblib.load("../models/fraud_dream_model_bundle.joblib")
-    return bundle
+    # PATH objesini stringe çevirerek joblib'e veriyoruz
+    return joblib.load(str(MODEL_PATH))
 
 system = load_fraud_system()
 model = system['model']

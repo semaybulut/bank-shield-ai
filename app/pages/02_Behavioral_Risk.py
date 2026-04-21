@@ -9,7 +9,15 @@ st.set_page_config(
     layout="wide"
 )
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+import os
+from pathlib import Path
+
+# --- AKILLI YOL TANIMLAMA (GÜNCELLENDİ) ---
+# Dosya 'app/pages/02_Behavioral_Risk.py' konumunda olduğu için 
+# 3 kez .parent diyerek ana dizine (bank-shield-ai) ulaşıyoruz.
+current_file_path = Path(__file__).resolve()
+BASE_DIR = current_file_path.parent.parent.parent 
+
 MODELS_DIR = BASE_DIR / "models"
 SUMMARY_DATA_PATH = BASE_DIR / "data" / "processed" / "customer_risk_summary.parquet"
 
