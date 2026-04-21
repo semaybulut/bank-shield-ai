@@ -2,6 +2,9 @@ import streamlit as st
 import base64
 from pathlib import Path
 
+# --- SAYFA AYARLARI (En üstte olmalı) ---
+st.set_page_config(page_title="CaixaBank AI Risk Hub", page_icon="🏦", layout="wide")
+
 # --- LOGO OKUMA FONKSİYONU ---
 def get_base64_image(image_path):
     try:
@@ -10,30 +13,17 @@ def get_base64_image(image_path):
     except Exception as e:
         return None
 
-# logo.png dosyanın yolunu belirle
-# Dosya streamlit_app.py ile aynı klasördeyse "./logo.png"
-# Eğer bir üst klasördeyse "../logo.png" denemelisin
 current_dir = Path(__file__).parent
 logo_path = current_dir / "logo.png"
 logo_base64 = get_base64_image(str(logo_path))
 
-# --- HEADER GÜNCELLEME ---
+# --- LOGO HAZIRLAMA ---
 if logo_base64:
     logo_html = f'<img src="data:image/png;base64,{logo_base64}" width="200">'
 else:
-    # Logo bulunamazsa yedek olarak yazı gösterir
     logo_html = '<h2 style="color: #004587; margin:0;">CaixaBank</h2>'
 
-st.markdown(f"""
-    <div class="header-box">
-        {logo_html}
-        <div style="color: #004587; font-weight: bold;">Kişisel Bankacılık | Kurumsal | AI Risk Portal</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.set_page_config(page_title="CaixaBank AI Risk Hub", page_icon="🏦", layout="wide")
-
-# --- GELİŞMİŞ CSS: GERÇEK BANKACILIK TEMASI ---
+# --- GELİŞMİŞ CSS: BANKACILIK TEMASI VE SAĞ ÜST BUTONLAR ---
 st.markdown("""
     <style>
     /* Arka plan ve genel font */
@@ -42,12 +32,49 @@ st.markdown("""
     /* Üst Header Alanı */
     .header-box {
         background-color: white;
-        padding: 20px 50px;
+        padding: 15px 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 3px solid #ff6600; /* Caixabank Turuncusu */
+        border-bottom: 3px solid #ff6600;
         margin-bottom: 0px;
+    }
+
+    /* Sağ Üst Buton Menüsü */
+    .header-right-menu {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    /* Müşteri Ol Butonu (Kırmızı) */
+    .btn-register {
+        background-color: #eb0000;
+        color: white !important;
+        padding: 10px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    /* Giriş Yap Butonu (Yeşil) */
+    .btn-login {
+        background-color: #00a550;
+        color: white !important;
+        padding: 10px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+
+    .btn-register:hover, .btn-login:hover {
+        opacity: 0.8;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        color: white !important;
     }
     
     /* Hero Section (Giriş Bannerı) */
@@ -73,10 +100,9 @@ st.markdown("""
     }
     .service-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     }
     
-    /* Buton Tasarımları */
+    /* Streamlit Butonlarını Özelleştirme */
     div.stButton > button {
         background-color: #004587;
         color: white;
@@ -84,25 +110,32 @@ st.markdown("""
         border: none;
         padding: 10px 25px;
         font-weight: bold;
-        transition: 0.3s;
         width: 100%;
     }
     div.stButton > button:hover {
         background-color: #ff6600;
         color: white;
-        border: none;
     }
-    
-    /* Sidebar Temizleme */
-    section[data-testid="stSidebar"] { background-color: #ffffff; }
     </style>
     """, unsafe_allow_html=True)
 
+# --- HEADER (LOGO + SAĞ ÜST BUTONLAR) ---
+st.markdown(f"""
+    <div class="header-box">
+        <div style="display: flex; align-items: center;">
+            {logo_html}
+        </div>
+        <div class="header-right-menu">
+            <a href="#" class="btn-register">Müşteri Ol</a>
+            <a href="#" class="btn-login">Giriş Yap</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # --- HERO SECTION ---
 st.markdown("""
     <div class="hero-section">
-        <h1 style="font-size: 3rem; margin-bottom: 10px; color: white;">Güvenliğiniz, Bizim Önceliğimiz.</h1>
+        <h1 style="font-size: 3rem; margin-bottom: 10px; color: white; border:none;">Güvenliğiniz, Bizim Önceliğimiz.</h1>
         <p style="font-size: 1.2rem; opacity: 0.9;">Yapay zeka destekli Risk Yönetim Portalı ile tüm işlemlerinizi 7/24 kontrol altında tutun.</p>
     </div>
     """, unsafe_allow_html=True)
