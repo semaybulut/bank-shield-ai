@@ -1,4 +1,35 @@
 import streamlit as st
+import base64
+from pathlib import Path
+
+# --- LOGO OKUMA FONKSİYONU ---
+def get_base64_image(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except Exception as e:
+        return None
+
+# logo.png dosyanın yolunu belirle
+# Dosya streamlit_app.py ile aynı klasördeyse "./logo.png"
+# Eğer bir üst klasördeyse "../logo.png" denemelisin
+current_dir = Path(__file__).parent
+logo_path = current_dir / "logo.png"
+logo_base64 = get_base64_image(str(logo_path))
+
+# --- HEADER GÜNCELLEME ---
+if logo_base64:
+    logo_html = f'<img src="data:image/png;base64,{logo_base64}" width="200">'
+else:
+    # Logo bulunamazsa yedek olarak yazı gösterir
+    logo_html = '<h2 style="color: #004587; margin:0;">CaixaBank</h2>'
+
+st.markdown(f"""
+    <div class="header-box">
+        {logo_html}
+        <div style="color: #004587; font-weight: bold;">Kişisel Bankacılık | Kurumsal | AI Risk Portal</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.set_page_config(page_title="CaixaBank AI Risk Hub", page_icon="🏦", layout="wide")
 
