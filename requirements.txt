@@ -1,7 +1,14 @@
 streamlit
 pandas
 numpy
+<<<<<<< HEAD
 scikit-learn
 joblib
 xgboost
 pyarrow
+=======
+pyarrow
+scikit-learn
+xgboost
+joblib
+>>>>>>> 59586aa (Finalize cleanup (remaining changes))

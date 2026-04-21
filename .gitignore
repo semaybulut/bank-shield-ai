@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+venv/
 env/
 
 # Jupyter
@@ -10,16 +11,19 @@ env/
 # OS
 .DS_Store
 
-# Data (genelde ignore)
+# Secrets
+.env
+
+# Data
 data/raw/*
+data/interim/*
 data/processed/*
 
-# Ama BU dosya kalsın 👇
-!data/processed/transaction_features_mvp_sample.parquet
-
-# .gitkeep dosyaları da kalsın
+# keep placeholders
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
-# Secrets
-.env
+# keep selected processed parquet files
+!data/processed/transaction_features_mvp_sample.parquet
+!data/processed/client_history_summary.parquet
+!data/processed/merchant_risk_lookup.parquet
